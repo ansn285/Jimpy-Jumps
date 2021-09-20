@@ -774,5 +774,10 @@ namespace Mirror
         /// <para>When NetworkIdentity.RemoveClientAuthority is called on the server, this will be called on the client that owns the object.</para>
         /// </summary>
         public virtual void OnStopAuthority() {}
+
+        /// <summary>
+        /// This is invoked on behaviours when a network is destroyed.
+        /// </summary>
+        public virtual void OnNetworkDestroy() { }
     }
 }

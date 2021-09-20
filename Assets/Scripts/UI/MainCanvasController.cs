@@ -1,27 +1,28 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainCanvasController : MonoBehaviour
 {
-    [SerializeField] private GameObject optionsCanvas;
-    [SerializeField] private Image optionsButton;
+    [SerializeField] private GameObject optionsCanvas, modesCanvas;
+    [SerializeField] private Image optionsButton, menuBtnImage;
+    private AudioSource audioSource;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
 
     public void ToggleOptionsCanvas()
     {
+        if (GameController.sfx)
+        {
+            audioSource.Play();
+        }
+
+
         if (optionsCanvas.activeSelf)
         {
             optionsCanvas.SetActive(false);
@@ -32,7 +33,53 @@ public class MainCanvasController : MonoBehaviour
         {
             optionsCanvas.SetActive(true);
             optionsButton.enabled = false;
+
+            modesCanvas.SetActive(false);
+            menuBtnImage.enabled = true;
         }
+    }
+
+
+    public void ToggleModeCanvas()
+    {
+        if (GameController.sfx)
+        {
+            audioSource.Play();
+        }
+
+        if (modesCanvas.activeSelf)
+        {
+            modesCanvas.SetActive(false);
+            menuBtnImage.enabled = true;
+        }
+
+        else
+        {
+            modesCanvas.SetActive(true);
+            menuBtnImage.enabled = false;
+
+            optionsCanvas.SetActive(false);
+            optionsButton.enabled = true;
+        }
+    }
+
+
+
+
+    public void LoadLobby()
+    {
+        if (GameController.sfx)
+        {
+            audioSource.Play();
+        }
+
+        SceneManager.LoadScene(1);
+    }
+
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 }

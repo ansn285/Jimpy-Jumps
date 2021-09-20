@@ -6,6 +6,7 @@ public class PlayerNameInput : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private TMP_InputField nameInputField = null;
+    [SerializeField] private TMP_Text nameText = null;
     [SerializeField] private Button continueButton = null;
 
 
@@ -16,6 +17,12 @@ public class PlayerNameInput : MonoBehaviour
     private void Start()
     {
         SetUpInputField();
+
+        if (nameInputField.text != "")
+        {
+            nameText.gameObject.SetActive(true);
+            nameText.text = "Your Name: " + nameInputField.text;
+        }
     }
 
     private void SetUpInputField()
@@ -40,6 +47,9 @@ public class PlayerNameInput : MonoBehaviour
         DisplayName = nameInputField.text;
 
         PlayerPrefs.SetString(PlayerPrefsNameKey, DisplayName);
+
+        nameText.gameObject.SetActive(true);
+        nameText.text = "Your Name: " + nameInputField.text;
     }
 
 }
